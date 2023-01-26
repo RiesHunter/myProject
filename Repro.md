@@ -33,6 +33,7 @@ git commit -m "test directories"
 git push
 ```
 3. Created Repro.md file and pushed
+
 Installed Copy Markdown as HTML:Name: 
     Copy Markdown as HTML
     Id: jerriepelser.copy-markdown-as-html
@@ -40,6 +41,7 @@ Installed Copy Markdown as HTML:Name:
     Version: 1.1.0
     Publisher: Jerrie Pelser
     VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=jerriepelser.copy-markdown-as-html)
+
 Used [this website](https://www.freecodecamp.org/news/how-to-open-visual-studio-code-from-your-terminal/) to enable `code` command for Terminal. I also changed the default application for README.md and Repro.md to `VS Code`, so I can use `open` for these files specifically.
 
 ```shell
