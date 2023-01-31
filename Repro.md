@@ -55,3 +55,58 @@ git add .; git commit -m "Reformatted Repro.md"; git push
 rm foo.txt bar.txt
 git add .; git commit -m "More reformatting"; git push
 ```
+
+## 230131
+### Cloning course repo
+```shell
+#clicked "fork" [here](https://github.com/crsl4/phylogenetics-class), creating my own fork of the repo [here](https://github.com/RiesHunter/phylogenetics-class). This was nearly instantaneously completed
+#this allows me to pull her new commits to my fork
+#I had to remove my old copy of /phylogenetics-class that I had cloned from her repo
+cd /Users/rieshunter/Documents/bioinformatics
+git clone https://github.com/RiesHunter/phylogenetics-class #This will take a long while to clone a local version
+cd phylogenetics-class
+git remote -v # will tell us where we are in git
+git remote add upstream https://github.com/crsl4/phylogenetics-class.git #connects my local clone and her origin
+#output:
+    #origin	https://github.com/RiesHunter/phylogenetics-class (fetch)
+    #origin	https://github.com/RiesHunter/phylogenetics-class (push)
+    #upstream	https://github.com/crsl4/phylogenetics-class.git (fetch)
+    #upstream	https://github.com/crsl4/phylogenetics-class.git (push)
+```
+### Course repo is massive, so we're redo-ing it with a smaller repo
+```shell
+# fork [crsl4/phylo-class-social](https://github.com/crsl4/phylo-class-social)
+
+# clone my fork to local
+cd /Users/rieshunter/Documents/bioinformatics
+git clone https://github.com/RiesHunter/phylo-class-social.git
+cd phylo-class-social
+git remote -v #clone not linked to origin
+
+# link fork to origin
+git remote add upstream https://github.com/crsl4/phylo-class-social.git #"upstream" is typical, but not a required name—you can name it whatever you'd like!
+git remote -v #clone now linked to origin
+
+# pulling upstream changes
+# exploring potential errors
+## make sure to pull from repo before pushing
+```
+
+### In-class exercise
+```shell
+# change best-books.md file
+## - Hunter: Invisible Man by Ralph Ellison
+git config pull.rebase false
+
+git add .; git commit -mv "Hunter removed an empty directory"
+git pull upstream master -v
+git push -v
+# have to manually do a pull request in GitHub
+```
+
+### Commit Repro.md for 230131
+```shell
+git add . -v
+git commit -mv "Updated repro from fork day"
+git push -mv
+```
