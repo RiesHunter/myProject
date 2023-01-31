@@ -107,6 +107,6 @@ git push -v
 ### Commit Repro.md for 230131
 ```shell
 git add . -v
-git commit -mv "Updated repro from fork day"
-git push -mv
+git commit -m "Formatting update: Updated repro from fork day"
+git push -v
 ```
