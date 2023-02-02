@@ -1,8 +1,4 @@
-# To-do
- - Acquire data
- - 
-
-# Code
+# Class Notes
 ## 230126
 ### Created [GitHub repository](https://github.com/RiesHunter/myProject). 
 Updated git, configured git config, and cloned the class and personal repos:
@@ -108,3 +104,84 @@ git push -v
 ```shell
 git add . -v; git commit -m "Formatting update: Updated repro from fork day"; git push -v
 ```
+
+## 230202
+### To-do
+- (Learn@Home: Why learn phylogenomics?)[https://github.com/crsl4/phylogenetics-class/tree/master/lecture-notes/lecture2-learn-home.md]
+- (Learn@Home: Sequencing)[https://github.com/crsl4/phylogenetics-class/blob/master/lecture-notes/lecture4-learn-home.md]
+- HW 2.1 (reading)
+- Git (here)[https://github.com/crsl4/phylogenetics-class/blob/master/exercises/hw-git.md]
+
+### Reproducibility pop quiz
+```shell
+# added file Hunter.md with some text
+git add .; git commit -m "Hunter added a file."; git push
+
+## looks like you can reset your master branch to the upstream with the following command
+git reset --hard upstream/master
+# I ran this and then did the following code:
+nano Hunter.md #put some text in there
+git add .; git commit -m "Should be mergeable"; git push
+# looks like pull request updated with most recent commit after this!
+```
+
+### Sequencing
+#### MSA
+MSA helps resolve the historical substitution, insertion, and deletion evolutionary events
+- Very computationaly intensive
+
+Exercise 1:
+# C-->G sub
+    ACAT
+    AGAT
+# C deletion; G insertion
+    AC-AT
+    A-GAT
+
+Exercise 2:
+# What would be the alignment of the sequence
+    ACATTA
+# if it evolves into
+    TACA
+# and we know the following happens:
+- deletion of the first two nucleotides AC
+- Deletion of the second T
+- substitution of T into C
+- inversion of T at the front
+# Workspace:
+    -ACATTA
+    T--A-CA
+# without knowing the true evolutionary events, we would have created the alignment:
+    -ACATTA
+    TACA---
+
+Defining the cost of each event: deletion, insertion, substitution
+- Important for weighting what you value
+- E.g., an indel would likely be really bad in an intron
+
+Exercise 3:
+# How would you align `AACT` and `CTGG`?
+Cost of gap = 1
+Cost of sub = 3
+# Workspace: Cost = 1(4) + 3(0) = 4
+    AACT--
+    --CTGG
+I chose this because subs are costly (3) and indels are cheap (1)
+
+Exercise 4:
+# How would you align `AACT` and `CTGG`?
+Cost of gap = 4
+Cost of sub = 1
+# Workspace: Cost = 4(0) + 1(0) = 0
+    AACT
+    CTGG
+I chose this because any single indel would cost 4; whereas, all sub = 4
+Since a single indel can't make the number of subs 0, we won't do an indel and instead will just do all subs
+
+Needleman-Wunsch algorithm
+- Pairwise sequence alignment
+- Smart algorithm that works recursively in smaller chunks
+- 
+
+# Code for semester project
+### Blah
