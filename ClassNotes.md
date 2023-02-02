@@ -107,10 +107,10 @@ git add . -v; git commit -m "Formatting update: Updated repro from fork day"; gi
 
 ## 230202
 ### To-do
-- (Learn@Home: Why learn phylogenomics?)[https://github.com/crsl4/phylogenetics-class/tree/master/lecture-notes/lecture2-learn-home.md]
-- (Learn@Home: Sequencing)[https://github.com/crsl4/phylogenetics-class/blob/master/lecture-notes/lecture4-learn-home.md]
+- [Learn@Home: Why learn phylogenomics?](https://github.com/crsl4/phylogenetics-class/tree/master/lecture-notes/lecture2-learn-home.md)
+- [Learn@Home: Sequencing](https://github.com/crsl4/phylogenetics-class/blob/master/lecture-notes/lecture4-learn-home.md)
 - HW 2.1 (reading)
-- Git (here)[https://github.com/crsl4/phylogenetics-class/blob/master/exercises/hw-git.md]
+- Git [here](https://github.com/crsl4/phylogenetics-class/blob/master/exercises/hw-git.md)
 
 ### Reproducibility pop quiz
 ```shell
