@@ -190,3 +190,4 @@ Needleman-Wunsch algorithm
 Changed "Repro.md" to "notebook-log.md" per class instructions
 Updated .gitignore to ignore "ClassNotes.md"
 Quick push before class: "Notebook name change and placed ClassNotes.md in .gitignore"
+Second push before class: "Removed ClassNotes.md from .gitignore"
