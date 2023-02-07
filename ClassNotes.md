@@ -182,3 +182,11 @@ Needleman-Wunsch algorithm
 - Pairwise sequence alignment
 - Smart algorithm that works recursively in smaller chunks
     - Basically pairwise recursive comparison scores
+
+## 230207
+### To-do
+- [Needleman-Wunsch HW](https://github.com/crsl4/phylogenetics-class/blob/master/exercises/hw-needleman.md)
+
+Changed "Repro.md" to "notebook-log.md" per class instructions
+Updated .gitignore to ignore "ClassNotes.md"
+Quick push before class: "Notebook name change and placed ClassNotes.md in .gitignore"
