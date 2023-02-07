@@ -197,33 +197,33 @@ Second push before class: "Removed ClassNotes.md from .gitignore"
 `F(i,j) = min{F()+cost(),F()+1,F()+1}`
   - F(i,j), where F_i is row i and F_j is column j
 
-Example: 
- - Cost_sub = 1
- - Cost_gap = 2
-          f0 f1 f2 f3 f4
-             b1 b2 b3 b4
-          _  A  T  C  G
- f0     _ 0  2  4  6  8
- f1 a1  T 2  1  2  4  
- f2 a2  C 4            
- f3 a3  A 6          
+```shell
+# Example: 
+#  - Cost_sub = 1
+#  - Cost_gap = 2
+#           f0 f1 f2 f3 f4
+#              b1 b2 b3 b4
+#           _  A  T  C  G
+#  f0     _ 0  2  4  6  8
+#  f1 a1  T 2  1  2  4  
+#  f2 a2  C 4            
+#  f3 a3  A 6          
  
- Choose the lowest cost for a1b1:
-  - cost(a1,b1) +  F(0,0)           = 1 + 0 [*]
-  - cost(a1,b1) + (F(0,1) + F(0,0)) = 1 + 2 + 2
-  - cost(a1,b1) + (F(1,0) + F(0,0)) = 1 + 2 + 2
+# Choose the lowest cost for a1b1:
+# cost(a1,b1) +  F(0,0)           = 1 + 0 [*]
+# cost(a1,b1) + (F(0,1) + F(0,0)) = 1 + 2 + 2
+# cost(a1,b1) + (F(1,0) + F(0,0)) = 1 + 2 + 2
 
- Choose the lowest cost for a1b2:
-  - cost(a1,b2) +  F(0,1)           = 0 + 2 [*]
-  - cost(a1,__) + (F(0,2) + F(0,0)) = 2 + 2 + 2
-  - cost(__,b2) +  F(1,1)           = 2 + 1
+# Choose the lowest cost for a1b2:
+# cost(a1,b2) +  F(0,1)           = 0 + 2 [*]
+# cost(a1,__) + (F(0,2) + F(0,0)) = 2 + 2 + 2
+# cost(__,b2) +  F(1,1)           = 2 + 1
 
- Choose the lowest cost for a1b3:
-  - cost(a1,b3) +  F(0,2)           = 1 + 4
-  - cost(a1,__) +  F(0,3)           = 2 + 6 + 2
-  - cost(__,b3) +  F(1,2)           = 2 + 2 [*]
-
-
+# Choose the lowest cost for a1b3:
+# cost(a1,b3) +  F(0,2)           = 1 + 4
+# cost(a1,__) +  F(0,3)           = 2 + 6 + 2
+# cost(__,b3) +  F(1,2)           = 2 + 2 [*]
+```
 Trace back arrows to construct the alignment: 
  - diag arrow = match a and b
  - Right arrow = b matches gap
