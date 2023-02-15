@@ -10,3 +10,6 @@ Why: We know flu evolution is evolutionarily stochastic within-host but determin
 Aims:
 Evolution w/in hosts through serial time points
 Evolution b/w hosts through household pairing
+
+### Stage of data
+Raw SRA reads in need of QC and alignment
