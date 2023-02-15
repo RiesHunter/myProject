@@ -257,3 +257,44 @@ How do you align alignments?
         `cost(a_i,b_j) = sum P(x of a_i) P(y of b_j)`
         - x will sequentially equal A, C, T, or G (same with y), but x≠y
         - cost will be from matrix value, not nucleotide (because we don't have nucs)
+
+## 220214
+Going to use JT McCrone's "Stochastic" dataset:
+NCBI BioProject (accession no: PRJNA412631)
+
+Installed sra-toolkit, clustalw, t-coffee
+```shell
+sudo apt install sra-toolkit
+sudo apt install clustalw; clustalw # exit with "X"
+sudo apt install t-coffee -y; t_coffee
+sudo apt install muscle
+
+# I created test.sh to test these packages
+# ran the following for script permissions:
+cd /home/rieshunter/GitHub/myProject/data/tool_test
+chmod 755 test.sh
+## added directory to PATH in .bashrc from $HOME
+PATH="$PATH:/home/rieshunter/GitHub/myProject/data/tool_test"
+```
+
+full test.sh script:
+```shell
+#!/bin/bash
+
+cwd=$(pwd)
+data_dir="/home/rieshunter/GitHub/phylogenetics-class/data"
+echo $data_dir
+ls -lh $data_dir
+
+## clustalw
+clustalw -ALIGN -INFILE=${data_dir}/primatesAA.fasta -OUTFILE=${cwd}/primatesAA-aligned-clustalw.fasta -OUTPUT=FASTA
+
+## t-coffee
+t_coffee ${data_dir}/primatesAA.fasta
+mv ${cwd}/primatesAA.aln ${cwd}/primatesAA-aligned-tcoffee_MSA.aln
+mv ${cwd}/primatesAA.dnd ${cwd}/primatesAA-aligned-tcoffee_GUIDE_TREE.dnd
+mv ${cwd}/primatesAA.html ${cwd}/primatesAA-aligned-tcoffee_MSA.html
+
+## muscle
+muscle -in ${data_dir}/primatesAA.fasta -out primatesAA-aligned-muscle.fasta
+```
