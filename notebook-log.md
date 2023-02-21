@@ -1,6 +1,6 @@
 # Code for semester project
 ### Description of data
-Source: https://elifesciences.org/articles/35962#content
+Source: https://elifesciences.org/articles/35962#content and https://www.ncbi.nlm.nih.gov/bioproject/PRJNA412631
 Who: HIVE Cohort for respiratory virus surveillance
 What: Flu sequences from 200 people in a test-negative study
 Where: JT McCrone et al. at UMich
@@ -15,37 +15,5 @@ Evolution b/w hosts through household pairing
 Raw SRA reads in need of QC and alignment
 
 ### Download data
-Downloaded SRA toolkit
-Created SraAccList.csv from NCBI source
-Created short version with:
-```shell
-cat SraAccList.csv | head -6 | tail -5 > short_SraAccList.csv
-```
-Download the first five SRA files:
-```shell
-prefetch --option-file short_SraAccList.csv
-```
-Convert to fastq, organize, compress:
-```shell
-fasterq-dump --split-files ./SRR*/*.sra
-rm -r SRR*/
-mkdir ./raw_reads
-mv SRR*.fastq ./raw_reads
-cd ./raw_reads
-gzip *.fastq #this part takes a while
-```
-
-### Trim reads
-```shell
-TrimmomaticPE
-
-
-```
-
-
-
-
-
-
-
-
+Processed fastas retrieved from GitHub page:
+https://github.com/lauringlab/Host_level_IAV_evolution

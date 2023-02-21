@@ -258,7 +258,7 @@ How do you align alignments?
         - x will sequentially equal A, C, T, or G (same with y), but x≠y
         - cost will be from matrix value, not nucleotide (because we don't have nucs)
 
-## 220214
+## 230214
 Going to use JT McCrone's "Stochastic" dataset:
 NCBI BioProject (accession no: PRJNA412631)
 
@@ -298,3 +298,33 @@ mv ${cwd}/primatesAA.html ${cwd}/primatesAA-aligned-tcoffee_MSA.html
 ## muscle
 muscle -in ${data_dir}/primatesAA.fasta -out primatesAA-aligned-muscle.fasta
 ```
+
+
+## 230221
+Distance-based methods
+ - Not character-based
+ - Based on an explicit model of evolution
+ - Create dissimilarity matrix between sequences ("p-distances")
+ - Covert to evolutionary distance by correcting for multiple events per site
+    - This is where the model of substitution comes in
+    - Jukes & Cantor (1969): d_AB = -3/4 ln(1 - 4/3 * p_distance)
+ - Create a distance tree
+    - Don't need to search space of trees
+        - Big advantage compared to parsimony or likelihood methods
+        - Faster
+    - Disadvantages
+        - Approximate tree (may not be optimum; disadvantage of all inference methods)
+    - Cluster analysis
+        - "ultrametric trees" where end nodes are equidistant from root
+        - Assumes a molecular clock
+        - Uses WPGMA (simple average from ancestor) and UPGMA (averaged by n taxa in cluster)
+        - Just a tree, no confidence interval
+        - "Evolutionary distances" unit = substitutions
+        - Might not take into account indels
+    - Minimum evolution
+        - Additive trees
+            - Better for non-clock-like behavior
+        - Algorithm = neighbor-joining
+            - Input = matrix of pairwise distances
+            - Sum of distances for every end node
+            - Rate-correct distance matrix
