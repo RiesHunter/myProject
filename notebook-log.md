@@ -32,7 +32,10 @@ echo -ne "[#--------] ${f}\r"
 ```
 
 ### Align HK_1 with ClustalW and Muscle
-Created "run_clustalw.sh" as well as a muscle derivative following this format:
+ClustalW will be a good "Vanilla" test that is most strong in its use of weight-based scoring. Because so many of my sequences will be largely identical, this could be an important component that other software may not have. ClustalW also outputs a .dnd file which can be used to make a dendrogram. Might save me a step later!
+Muscle will be a nice experiment on progressive alignment, which should be an improvement in accuracy and speed (yes, almost 3x faster!) in comparison to ClustalW. While this is faster and perhaps more accurate, I'm unsure at this point how to test accuracy in comparison to other programs. How do we know which is more accurate?
+
+Created "run_clustalw.sh":
 ```shell
 #!/bin/bash
 
