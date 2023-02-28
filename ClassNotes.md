@@ -328,3 +328,35 @@ Distance-based methods
             - Input = matrix of pairwise distances
             - Sum of distances for every end node
             - Rate-correct distance matrix
+
+## 230223
+Parsimony-based methods
+ - Does not rely on models of evolution
+ - The tree that minimizes the amount of evolutionary change required to explain the data
+ - Assumptions
+    - Most effective when rate of evolution is slow (not always the assumption)
+    - Can perform well under high rates of evolution as long as there are no pathological inequalities
+    - Main assumption: independence among characters
+ - Methodology
+    - Determine the amount of character change required to explain the data
+    - Search over all possible ultrametric tree topologies
+        - Newick format (AKA parenthetical format)
+        - Compute lowest parsimony score ancestral tree per site
+        - Uses dynamic programming (breaking up complex task into manner smaller tasks)
+    - Fitch algorithm
+        - Faster solution
+        - Random root
+        - Assigns costs to mismatching nodes
+            - Match = R + L
+            - No match = R + L + 1
+            - Tips of leaves equal zero initially
+            (((C,C),T),G)
+            (C,C)           = {C}       = 0 + 0 = 0
+            ((C,C),T)       = {C,T}     = 0 + 0 + 1 = 1
+            (((C,C),T),G)   = {C,T,G} = 1 + 0 + 1 = 2
+ - "Long branch attraction" (Felsenstein zone) is the kiss of death for this method
+    - Avoid
+    - Long branches in additive trees will be grouped together in ultrametric trees
+
+Software
+ - 
