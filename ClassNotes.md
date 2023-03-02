@@ -358,5 +358,63 @@ Parsimony-based methods
     - Avoid
     - Long branches in additive trees will be grouped together in ultrametric trees
 
-Software
- - 
+## 230302 
+Models of evolution
+ - Probability
+    - Count number of observations for length of time
+        - Have to account for variation!
+        - Ballpark estimate
+ - Different models have different assumptions:
+    - Symmetric around the mean?
+    - Variation around the mean?
+ - Poisson model
+    - P(X=k) = (lambda^k * e^-lambda) / k!
+    - k = number of observations
+        - "What is the probability of seeing k number of observations?"
+    - Lambda = average
+    - E.g.,
+        - Average number of observations = 8.4
+        - What is the porbability of seeing 5?
+        - (8.4^5 * e^-8.4) / 5!
+        - (41821.2 * 0.0002) / 120 
+        - 8.4 / 120 = .078
+    - Imperfect model
+        - Single parameter (mean)
+        - Assumes same model regardless of events
+ - Assume:
+    - The mutation process is the same at every branch of the tree
+    - We assume sites evolve independently
+        - We can focus on the mutation process between two sites
+    - All sites evolve the same
+        - We can choose any site that fits the model
+ - Probability model for the evolution of an ancestral site into a descendant site
+    - Number of mutations on time t is assumed to follow a Poisson distribution
+    - P(X = k) = ( (µt)^k * e^(-µt) ) / k!
+    - µ = rate of mutation events
+ - Continuos-time Markov chain
+    - Probabilities for the next event do not depend on the time point where the chain is
+    - Continuous numerical time, not integer
+    - Non-discrete
+    - Independent of place in previous step
+        - Forgets about the past
+    - Probabilities of the next state only depend on the current state
+    - Must choose substitution model Q
+    - Math:
+        - Ergodic
+            - ?
+        - Time-reversible
+            - Same probability there and back
+Models of substituion
+ - Jukes-Cantor Model (JC69)
+    - Setting all site-frequencies to be 1/4
+    - Quick but likely less accurate
+ - Felsenstein model (F81)
+    - Does not assume observed frequencies of substitutinos
+    - Empirically determine the four site-frequency paramters
+    - Assumes rate that a nucleotide is observed is the rate of mutation to that nucleotide
+ - General Time Reversible (GTR)
+    - Very flexible and general, but complicated
+    - Many parameters
+    - Empirically determine the ten site-frequency paramters
+        - 6 constants, 4 πs
+    - Also uses constants for each site
