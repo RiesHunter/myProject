@@ -72,3 +72,37 @@ Benchmarking 10 flu genomes:
  - Muscle: 1 minute and 14 seconds
  - Clustalw: 3 minutes and 11 seconds
  - Tcoffee: [soon-to-be-clocked]
+
+### Utilize ape, phangorn, and adegenet to construct trees
+In R, I imported the muscle alignment for HA
+The alignment was imported with both "fasta2DNAbin" and "read.phyDat"
+The "fasta2DNAbin" command was used for a UPGMA distance-based trees
+  Pairwise distances were calculated using JC69
+  Distance matrices were converted to trees with UPGMA and NJ
+The "read.phyDat" command was used for a parsimony-based tree
+  Parsimony of all trees were calculated:
+    ```shell
+      > parsimony(treeUPGMA, phydat_muscle_HA)
+    [1] 97
+    > parsimony(treeNJ, phydat_muscle_HA)
+    [1] 90
+    > parsimony(treeRatchet, phydat_muscle_HA)
+    [1] 90
+    ```
+  treeRatchet is the parsimony tree
+    A parsimony ratchet (100 iterations) was applied to allow for quick and relatively accurate maximum parsimony calculations
+    acctran was applied to allow for polytomies (this dataset has a bunch of them!)
+    di2multi collapses branches of zero length
+
+Chosen algorithms:
+  JC69
+    - Incredibly simple
+    - Assumes equal base freq.
+    - Assumes equal base mutation rates
+    - Only parameter is µ, the overall substitution rate
+
+Figures:
+![treeNJ](figures/treeNJ.tiff)
+![treeUPGMA](figures/treeUPGMA.tiff)
+![treeRatchet](figures/treeRatchet.tiff)
+
