@@ -3,18 +3,17 @@ rm(list = ls())
 
 #### Session prep ####
 ## Install packages and load libraries as required
-if(!require(tidyverse)){
-  install.packages("tidyverse", dependencies = T)
-  library(tidyverse)
-}
+install.packages("tidyverse", dependencies = T)
+library(tidyverse)
 if(!require(ggplot2)){
   install.packages("ggplot2", dependencies = T)
   library(ggplot2)
 }
 
-if (!require("BiocManager", quietly = TRUE))
+if (!require("BiocManager", quietly = TRUE)) {
   install.packages("BiocManager")
-library(BiocManager)
+  library(BiocManager)
+}
 BiocManager::install("ggtree")
 library(ggtree)
 
