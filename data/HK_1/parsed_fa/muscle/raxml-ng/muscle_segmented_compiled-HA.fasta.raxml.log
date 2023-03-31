@@ -1,0 +1,79 @@
+
+RAxML-NG v. 1.1.0 released on 29.11.2021 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz, 2 cores, 7 GB RAM
+
+RAxML-NG was called at 30-Mar-2023 20:13:11 as follows:
+
+raxml-ng --check --msa ../muscle_segmented_compiled-HA.fasta --model GTR+G
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1680225191
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (auto)
+
+[00:00:00] Reading alignment from file: ../muscle_segmented_compiled-HA.fasta
+[00:00:00] Loaded alignment with 63 taxa and 1751 sites
+
+WARNING: Sequences HA|HS1579_B.removed.parsed and HA|MH8766_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|PC1A.removed.parsed and HA|PC1B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1518_B.removed.parsed and HA|HS1519_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1562_B.removed.parsed and HA|MH8586_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1562_B.removed.parsed and HA|MH8688_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1562_B.removed.parsed and HA|MH8689_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1562_B.removed.parsed and HA|MH8690_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1562_B.removed.parsed and HA|MH8691_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1562_B.removed.parsed and HA|MH9017_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1357_B.removed.parsed and HA|HS1516_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1357_B.removed.parsed and HA|HS1543_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1357_B.removed.parsed and HA|MH8594_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1341_B.removed.parsed and HA|HS1375_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1364_B.removed.parsed and HA|HS1381_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1566_B.removed.parsed and HA|HS1567_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1566_B.removed.parsed and HA|MH8700_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1573_B.removed.parsed and HA|MH8765_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|MH8924_A.removed.parsed and HA|MH8925_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1530_B.removed.parsed and HA|HS1531_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1530_B.removed.parsed and HA|MH8592_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1402_B.removed.parsed and HA|HS1525_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1402_B.removed.parsed and HA|MH8451_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1345_B.removed.parsed and HA|HS1416_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1417_B.removed.parsed and HA|HS1448_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1409_B.removed.parsed and HA|HS1421_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1409_B.removed.parsed and HA|HS1461_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1409_B.removed.parsed and HA|HS1487_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1409_B.removed.parsed and HA|HS1535_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1409_B.removed.parsed and HA|HS1536_B.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1409_B.removed.parsed and HA|MH8588_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1409_B.removed.parsed and HA|MH8611_A.removed.parsed are exactly identical!
+WARNING: Sequences HA|HS1409_B.removed.parsed and HA|MH8692_A.removed.parsed are exactly identical!
+WARNING: Duplicate sequences found: 32
+
+NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
+NOTE: was saved to: /home/rieshunter/Code/myProject/data/HK_1/parsed_fa/muscle/muscle_segmented_compiled-HA.fasta.raxml.reduced.phy
+
+Alignment comprises 1 partitions and 1751 sites
+
+Partition 0: noname
+Model: GTR+FO+G4m
+Alignment sites: 1751
+Gaps: 0.00 %
+Invariant sites: 95.26 %
+
+
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /home/rieshunter/Code/myProject/data/HK_1/parsed_fa/muscle/muscle_segmented_compiled-HA.fasta.raxml.log
+
+Analysis started: 30-Mar-2023 20:13:11 / finished: 30-Mar-2023 20:13:11
+
+Elapsed time: 0.032 seconds
+

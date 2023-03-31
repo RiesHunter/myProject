@@ -108,3 +108,65 @@ Figures:
 
 
 ### RAxML-NG for maximum likelihood
+RAxML-NG is purportedly a fast, modular ML program. It touts its speed and precision, but seems to fall short of IQ-Tree in tree inference accuracy. Still, it generally finds the best-scoring tree overall! Its speed and general precision makes it the optimal choice for my preliminary ML calculations.
+Assumptions: mutational processes same at each branch; all sites evolve independently of eachother
+(this is unlikely to be suitable for influenza in general, but this analysis will be a suitable first step toward a tree)
+
+#### download
+Downloaded raxml-ng_v1.1.0_linux_x86_64.zip from https://github.com/amkozlov/raxml-ng/releases/tag/1.1.0, as I had issues with the make step after pulling from GitHub 
+```shell
+## moved .zip file to ~/Code/
+mkdir raxml-ng
+mv raxml-ng*.zip raxml-ng/
+unzip raxml-ng*.zip
+
+./raxml-ng -v
+ #(base) rieshunter@hries:~/Code/raxml-ng$ ./raxml-ng -v
+
+ #RAxML-NG v. 1.1.0 released on 29.11.2021 by The Exelixis Lab.
+ #Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+ #Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+ #Latest version: https://github.com/amkozlov/raxml-ng
+ #Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+ #System: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz, 2 cores, 7 GB RAM
+
+## added to PATH, so I can call in myProject
+# nano .bashrc
+# PATH="$PATH:/home/rieshunter/Code/raxml-ng"
+## reloaded terminal session
+raxml-ng -v
+ #<pre>(base) <font color="#8AE234"><b>rieshunter@hries</b></font>:<font color="#729FCF"><b>~/Code/myProject</b></font>$ raxml-ng -v
+
+ #RAxML-NG v. 1.1.0 released on 29.11.2021 by The Exelixis Lab.
+ #Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+ #Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+ #Latest version: https://github.com/amkozlov/raxml-ng
+ #Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+ #System: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz, 2 cores, 7 GB RAM
+```
+
+#### execute
+```shell
+#(base) rieshunter@hries:~/Code/myProject/data/HK_1/parsed_fa/muscle/raxml-ng$ 
+raxml-ng --check --msa ../muscle_segmented_compiled-HA.fasta --model GTR+G
+mv ../*raxml.* .
+raxml-ng --check --msa *.phy --model GTR+G
+ # in both logs, we see identical consensus-level sequences, which are expected for rapid flu transmission within a community. Acute infections transmit little diversity.
+
+## time to infer the tree
+raxml-ng --msa *.phy --prefix HK_1_HA --model GTR+G --seed 920
+ # (base) rieshunter@hries:~/Code/myProject/data/HK_1/parsed_fa/muscle/raxml-ng$ ls
+ #total 236K
+ #-rw-rw-r-- 1 rieshunter rieshunter  130 Mar 30 20:13 HK_1_HA.raxml.bestModel
+ #-rw-rw-r-- 1 rieshunter rieshunter 1.4K Mar 30 20:13 HK_1_HA.raxml.bestTree
+ #-rw-rw-r-- 1 rieshunter rieshunter 1.3K Mar 30 20:13 HK_1_HA.raxml.bestTreeCollapsed
+ #-rw-rw-r-- 1 rieshunter rieshunter  14K Mar 30 20:13 HK_1_HA.raxml.log
+ #-rw-rw-r-- 1 rieshunter rieshunter  28K Mar 30 20:13 HK_1_HA.raxml.mlTrees
+ #-rw-rw-r-- 1 rieshunter rieshunter 3.8K Mar 30 20:13 HK_1_HA.raxml.rba
+ #-rw-rw-r-- 1 rieshunter rieshunter  28K Mar 30 20:13 HK_1_HA.raxml.startTree
+ #-rw-rw-r-- 1 rieshunter rieshunter 4.7K Mar 30 20:13 muscle_segmented_compiled-HA.fasta.raxml.log
+ #-rw-rw-r-- 1 rieshunter rieshunter  54K Mar 30 20:13 muscle_segmented_compiled-HA.fasta.raxml.reduced.phy
+ #-rw-rw-r-- 1 rieshunter rieshunter 1.4K Mar 30 20:13 muscle_segmented_compiled-HA.fasta.raxml.reduced.phy.raxml.log
+```
