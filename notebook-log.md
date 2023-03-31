@@ -12,7 +12,7 @@ Evolution w/in hosts through serial time points
 Evolution b/w hosts through household pairing
 
 ### Stage of data
-Raw SRA reads in need of QC and alignment
+Fastas to be aligned.
 
 ### Download data
 Processed fastas retrieved from GitHub page:
@@ -106,3 +106,5 @@ Figures:
 ![treeUPGMA](figures/treeUPGMA.tiff)
 ![treeRatchet](figures/treeRatchet.tiff)
 
+
+### RAxML-NG for maximum likelihood

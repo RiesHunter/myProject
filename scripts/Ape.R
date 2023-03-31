@@ -17,8 +17,8 @@ if(!require(phangorn)){
 }
 
 #### Import data ####
-dir_s <- paste("/Users/rieshunter/Documents/GitHub/myProject/data/HK_1/parsed_fa")
-dir_muscle <- paste("/Users/rieshunter/Documents/GitHub/myProject/data/HK_1/parsed_fa/muscle")
+dir_s <- paste("/Users/rieshunter/Documents/bioinformatics/myProject/data/HK_1/parsed_fa")
+dir_muscle <- paste("/Users/rieshunter/Documents/bioinformatics/myProject/data/HK_1/parsed_fa/muscle")
 setwd(dir_muscle); getwd(); dir()
 dna_muscle_HA <- fasta2DNAbin(file="muscle_segmented_compiled-HA.fasta")
 phydat_muscle_HA <- read.phyDat(file="muscle_segmented_compiled-HA.fasta", format="fasta")
