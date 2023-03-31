@@ -51,3 +51,23 @@ plotBS(midpoint(treeRatchet),
        main = "UPGMA JC69 parsimony-based tree",
        cex=.4)
 add.scale.bar()
+
+#### Root ML tree ####
+dir <- paste("/home/rieshunter/Code/myProject/data/HK_1/parsed_fa/muscle/raxml-ng")
+setwd(dir); getwd(); dir()
+## .bestTree
+bestTree <- paste("HK_1_HA.raxml.bestTree")
+tr_bestTree <- ape::read.tree(bestTree)
+tr_bestTree$tip.label <- gsub(".removed.parsed", "", tr_bestTree$tip.label)
+tr_bestTree$tip.label <- gsub("HA\\|", "", tr_bestTree$tip.label)
+tr_bestTree_root <- root(tr_bestTree, outgroup = "MH8714_A")
+plot(tr_bestTree_root)
+
+## .mlTrees
+mlTrees <- paste("HK_1_HA.raxml.mlTrees")
+tr_mlTrees <- lapply(ape::read.tree(mlTrees, keep.multi = T), ape::consensus)
+plot(tr_mlTrees)
+
+
+
+
