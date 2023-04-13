@@ -106,6 +106,8 @@ Figures:
 ![treeUPGMA](figures/treeUPGMA.tiff)
 ![treeRatchet](figures/treeRatchet.tiff)
 
+#### Write nexus file in R
+ - Used write.nexus(), which is a function in APE
 
 ### RAxML-NG for maximum likelihood
 RAxML-NG is purportedly a fast, modular ML program. It touts its speed and precision, but seems to fall short of IQ-Tree in tree inference accuracy. Still, it generally finds the best-scoring tree overall! Its speed and general precision makes it the optimal choice for my preliminary ML calculations.
@@ -185,3 +187,14 @@ mb -v
 ##  Compiler:   gnu 11.2.0
 ```
 
+#### MrBayes Block
+ - "mb_block.txt" in ~/scripts/
+ - See "https://github.com/crsl4/phylogenetics-class/blob/master/exercises/notebook-log.md" for example used here
+
+#### Append block to .nex and run
+```
+cat HK_1.nex mb_block.txt > HK_1-mb.nex
+
+mb HK_1-mb.nex
+
+```
