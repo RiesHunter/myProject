@@ -170,3 +170,18 @@ raxml-ng --msa *.phy --prefix HK_1_HA --model GTR+G --seed 920
  #-rw-rw-r-- 1 rieshunter rieshunter  54K Mar 30 20:13 muscle_segmented_compiled-HA.fasta.raxml.reduced.phy
  #-rw-rw-r-- 1 rieshunter rieshunter 1.4K Mar 30 20:13 muscle_segmented_compiled-HA.fasta.raxml.reduced.phy.raxml.log
 ```
+
+### MrBayes
+ - Created shell script "Bayesian.sh" in ~/scrips/
+
+#### Download (linux)
+`sudo apt install mrbayes`
+```
+mb -v
+## returns the following:
+##  Version:    3.2.7a
+##  Features:   Beagle readline
+##  Host type:  x86_64-pc-linux-gnu (CPU: x86_64)
+##  Compiler:   gnu 11.2.0
+```
+
