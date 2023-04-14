@@ -106,9 +106,6 @@ Figures:
 ![treeUPGMA](figures/treeUPGMA.tiff)
 ![treeRatchet](figures/treeRatchet.tiff)
 
-#### Write nexus file in R
- - Used write.nexus(), which is a function in APE
-
 ### RAxML-NG for maximum likelihood
 RAxML-NG is purportedly a fast, modular ML program. It touts its speed and precision, but seems to fall short of IQ-Tree in tree inference accuracy. Still, it generally finds the best-scoring tree overall! Its speed and general precision makes it the optimal choice for my preliminary ML calculations.
 Assumptions: mutational processes same at each branch; all sites evolve independently of eachother
@@ -174,26 +171,42 @@ raxml-ng --msa *.phy --prefix HK_1_HA --model GTR+G --seed 920
 ```
 
 ### MrBayes
- - Created shell script "Bayesian.sh" in ~/scrips/
+#### Rationale
+MrBayes is a program for Bayesian inference using a Metropolis-Coupled Markov Chain Monte Carlo (MC-MCMC). Using posterior probabilities of trees, we can make phylogenetic inferences for a group of species. To approximate this, MrBayes utilizes MC-MCMC on phylogenetic trees. Importantly, we can adjust models and assumptions easily with MrBayes, allowing for the assessment of diverse parameters relatively easily. The major strength of MrBayes is its computational efficiency, largely due to Bayesian inference. Additionally, we can apply prior knowledge to a dataset to output a distribution of a parameter—not just a point estimate. The major weaknesses of MrBayes are largely in the user—the user's priors, models, and assumptions of both. Further, some may argue that the incorporation of beliefs on a dataset is inherently flawed. Still, MrBayes is clearly a useful tool, amongst many, to analyze phylogenetic relationships.
 
-#### Download (linux)
-`sudo apt install mrbayes`
+#### My assumptions
+Proportions:  Beta
+Branch len.:  log-normal
+State freq.:  Dirichlet
+
+
+#### Download (Mac)
 ```
+brew tap brewsci/bio
+brew install mrbayes
+
 mb -v
 ## returns the following:
-##  Version:    3.2.7a
-##  Features:   Beagle readline
-##  Host type:  x86_64-pc-linux-gnu (CPU: x86_64)
-##  Compiler:   gnu 11.2.0
+##  MrBayes, Bayesian Analysis of Phylogeny
+##  
+##  Version:   3.2.7a
+##  Features:  SSE Beagle MPI
+##  Host type: x86_64-apple-darwin22.1.0 (CPU: x86_64)
+##  Compiler:  clang 14.0.0
 ```
 
 #### MrBayes Block
  - "mb_block.txt" in ~/scripts/
  - See "https://github.com/crsl4/phylogenetics-class/blob/master/exercises/notebook-log.md" for example used here
 
+#### Create Nexus file
+ - Used run_clustalW_Nexus.sh script in ~/scripts/ on segmented_compiled files
+ - Same code as run_clustalW.sh used earlier but outputs Nexus file
+ - Copied file from working ~/data/HK_1/parsed_fa/clustalw/ folder to ~/results/ folder
+
 #### Append block to .nex and run
 ```
-cat HK_1.nex mb_block.txt > HK_1-mb.nex
+cat clustalw_segmented_compiled_HA.nex mb_block.txt > HK_1-mb.nex
 
 mb HK_1-mb.nex
 
