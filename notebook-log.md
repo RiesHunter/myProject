@@ -41,6 +41,9 @@ Muscle will be a nice experiment on progressive alignment, which should be an im
 3x faster!) in comparison to ClustalW. While this is faster and perhaps more accurate, I'm unsure at this point how to test 
 accuracy in comparison to other programs. How do we know which is more accurate?
 
+Installed clustalw with `brew install brewsci/bio/clustal-w`
+clustalw version: CLUSTAL 2.1 Multiple Sequence Alignments
+
 Created "run_clustalw.sh":
 ```shell
 #!/bin/bash
