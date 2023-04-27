@@ -138,6 +138,13 @@ Downloaded raxml-ng from brew with `brew install brewsci/bio/raxml-ng` on MacOS
 
 #### execute
 ```shell
+## remove spaces in taxa names for cali09
+sed -i.bak 's/parsed .*/parsed/g' muscle_segmented_compiled-HA.fasta
+ # creates .bak backup of original
+
+## remove Genbank and spaces from taxa names from perth
+sed -i.bak 's/ GenBank.*//g' muscle_segmented_compiled-HA.fasta
+ 
 #(base) rieshunter@hries:~/Code/myProject/data/HK_1/parsed_fa/muscle/raxml-ng$ 
 raxml-ng --check --msa ../muscle_segmented_compiled-HA.fasta --model GTR+G
 mv ../*raxml.* .
