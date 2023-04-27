@@ -37,7 +37,9 @@ Installed Copy Markdown as HTML:Name:
     Publisher: Jerrie Pelser
     VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=jerriepelser.copy-markdown-as-html)
 
-Used [this website](https://www.freecodecamp.org/news/how-to-open-visual-studio-code-from-your-terminal/) to enable `code` command for Terminal. I also changed the default application for README.md and Repro.md to `VS Code`, so I can use `open` for these files specifically.
+Used [this website](https://www.freecodecamp.org/news/how-to-open-visual-studio-code-from-your-terminal/) to enable `code` 
+command for Terminal. I also changed the default application for README.md and Repro.md to `VS Code`, so I can use `open` 
+for these files specifically.
 
 ```shell
 touch Repro.md
@@ -55,7 +57,8 @@ git add .; git commit -m "More reformatting"; git push
 ## 230131
 ### Cloning course repo
 ```shell
-#clicked "fork" [here](https://github.com/crsl4/phylogenetics-class), creating my own fork of the repo [here](https://github.com/RiesHunter/phylogenetics-class). This was nearly instantaneously completed
+#clicked "fork" [here](https://github.com/crsl4/phylogenetics-class), creating my own fork of the repo 
+[here](https://github.com/RiesHunter/phylogenetics-class). This was nearly instantaneously completed
 #this allows me to pull her new commits to my fork
 #I had to remove my old copy of /phylogenetics-class that I had cloned from her repo
 cd /Users/rieshunter/Documents/bioinformatics
@@ -80,7 +83,8 @@ cd phylo-class-social
 git remote -v #clone not linked to origin
 
 # link fork to origin
-git remote add upstream https://github.com/crsl4/phylo-class-social.git #"upstream" is typical, but not a required name—you can name it whatever you'd like!
+git remote add upstream https://github.com/crsl4/phylo-class-social.git #"upstream" is typical, but not a required name—you 
+can name it whatever you'd like!
 git remote -v #clone now linked to origin
 
 # pulling upstream changes
@@ -107,7 +111,8 @@ git add . -v; git commit -m "Formatting update: Updated repro from fork day"; gi
 
 ## 230202
 ### To-do
-- [Learn@Home: Why learn phylogenomics?](https://github.com/crsl4/phylogenetics-class/tree/master/lecture-notes/lecture2-learn-home.md)
+- [Learn@Home: Why learn 
+phylogenomics?](https://github.com/crsl4/phylogenetics-class/tree/master/lecture-notes/lecture2-learn-home.md)
 - [Learn@Home: Sequencing](https://github.com/crsl4/phylogenetics-class/blob/master/lecture-notes/lecture4-learn-home.md)
 - HW 2.1 (reading)
 - Git [here](https://github.com/crsl4/phylogenetics-class/blob/master/exercises/hw-git.md)

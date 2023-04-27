@@ -5,7 +5,8 @@ Who: HIVE Cohort for respiratory virus surveillance
 What: Flu sequences from 200 people in a test-negative study
 Where: JT McCrone et al. at UMich
 When: 2010-2015
-Why: We know flu evolution is evolutionarily stochastic within-host but deterministic globally. Maybe the answer lies between-host?
+Why: We know flu evolution is evolutionarily stochastic within-host but deterministic globally. Maybe the answer lies 
+between-host?
 
 Aims:
 Evolution w/in hosts through serial time points
@@ -19,7 +20,8 @@ Processed fastas retrieved from GitHub page:
 https://github.com/lauringlab/Host_level_IAV_evolution
 
 ### Create concatenated fasta file for each segment
-Created "concatenate.sh", which effectively grabs each segment from each sample and concatenates it to one file, per gene. Here's small sample:
+Created "concatenate.sh", which effectively grabs each segment from each sample and concatenates it to one file, per gene. 
+Here's small sample:
 ```shell
 sed -n '/>*NP/p' ./${f}.fasta > name
 sed "s/NP/NP|${f}/g" name > name.temp
@@ -32,8 +34,12 @@ echo -ne "[#--------] ${f}\r"
 ```
 
 ### Align HK_1 with ClustalW and Muscle
-ClustalW will be a good "Vanilla" test that is most strong in its use of weight-based scoring. Because so many of my sequences will be largely identical, this could be an important component that other software may not have. ClustalW also outputs a .dnd file which can be used to make a dendrogram. Might save me a step later!
-Muscle will be a nice experiment on progressive alignment, which should be an improvement in accuracy and speed (yes, almost 3x faster!) in comparison to ClustalW. While this is faster and perhaps more accurate, I'm unsure at this point how to test accuracy in comparison to other programs. How do we know which is more accurate?
+ClustalW will be a good "Vanilla" test that is most strong in its use of weight-based scoring. Because so many of my 
+sequences will be largely identical, this could be an important component that other software may not have. ClustalW also 
+outputs a .dnd file which can be used to make a dendrogram. Might save me a step later!
+Muscle will be a nice experiment on progressive alignment, which should be an improvement in accuracy and speed (yes, almost 
+3x faster!) in comparison to ClustalW. While this is faster and perhaps more accurate, I'm unsure at this point how to test 
+accuracy in comparison to other programs. How do we know which is more accurate?
 
 Created "run_clustalw.sh":
 ```shell
@@ -90,7 +96,8 @@ The "read.phyDat" command was used for a parsimony-based tree
     [1] 90
     ```
   treeRatchet is the parsimony tree
-    A parsimony ratchet (100 iterations) was applied to allow for quick and relatively accurate maximum parsimony calculations
+    A parsimony ratchet (100 iterations) was applied to allow for quick and relatively accurate maximum parsimony 
+calculations
     acctran was applied to allow for polytomies (this dataset has a bunch of them!)
     di2multi collapses branches of zero length
 
@@ -107,12 +114,15 @@ Figures:
 ![treeRatchet](figures/treeRatchet.tiff)
 
 ### RAxML-NG for maximum likelihood
-RAxML-NG is purportedly a fast, modular ML program. It touts its speed and precision, but seems to fall short of IQ-Tree in tree inference accuracy. Still, it generally finds the best-scoring tree overall! Its speed and general precision makes it the optimal choice for my preliminary ML calculations.
+RAxML-NG is purportedly a fast, modular ML program. It touts its speed and precision, but seems to fall short of IQ-Tree in 
+tree inference accuracy. Still, it generally finds the best-scoring tree overall! Its speed and general precision makes it 
+the optimal choice for my preliminary ML calculations.
 Assumptions: mutational processes same at each branch; all sites evolve independently of eachother
 (this is unlikely to be suitable for influenza in general, but this analysis will be a suitable first step toward a tree)
 
 #### download
-Downloaded raxml-ng_v1.1.0_linux_x86_64.zip from https://github.com/amkozlov/raxml-ng/releases/tag/1.1.0, as I had issues with the make step after pulling from GitHub 
+Downloaded raxml-ng_v1.1.0_linux_x86_64.zip from https://github.com/amkozlov/raxml-ng/releases/tag/1.1.0, as I had issues 
+with the make step after pulling from GitHub 
 ```shell
 ## moved .zip file to ~/Code/
 mkdir raxml-ng
@@ -135,7 +145,8 @@ unzip raxml-ng*.zip
 # PATH="$PATH:/home/rieshunter/Code/raxml-ng"
 ## reloaded terminal session
 raxml-ng -v
- #<pre>(base) <font color="#8AE234"><b>rieshunter@hries</b></font>:<font color="#729FCF"><b>~/Code/myProject</b></font>$ raxml-ng -v
+ #<pre>(base) <font color="#8AE234"><b>rieshunter@hries</b></font>:<font color="#729FCF"><b>~/Code/myProject</b></font>$ 
+raxml-ng -v
 
  #RAxML-NG v. 1.1.0 released on 29.11.2021 by The Exelixis Lab.
  #Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
@@ -152,7 +163,8 @@ raxml-ng -v
 raxml-ng --check --msa ../muscle_segmented_compiled-HA.fasta --model GTR+G
 mv ../*raxml.* .
 raxml-ng --check --msa *.phy --model GTR+G
- # in both logs, we see identical consensus-level sequences, which are expected for rapid flu transmission within a community. Acute infections transmit little diversity.
+ # in both logs, we see identical consensus-level sequences, which are expected for rapid flu transmission within a 
+community. Acute infections transmit little diversity.
 
 ## time to infer the tree
 raxml-ng --msa *.phy --prefix HK_1_HA --model GTR+G --seed 920
@@ -172,7 +184,14 @@ raxml-ng --msa *.phy --prefix HK_1_HA --model GTR+G --seed 920
 
 ### MrBayes for bayesian inference
 #### Rationale
-MrBayes is a program for Bayesian inference using a Metropolis-Coupled Markov Chain Monte Carlo (MC-MCMC). Using posterior probabilities of trees, we can make phylogenetic inferences for a group of species. To approximate this, MrBayes utilizes MC-MCMC on phylogenetic trees. Importantly, we can adjust models and assumptions easily with MrBayes, allowing for the assessment of diverse parameters relatively easily. The major strength of MrBayes is its computational efficiency, largely due to Bayesian inference. Additionally, we can apply prior knowledge to a dataset to output a distribution of a parameter—not just a point estimate. The major weaknesses of MrBayes are largely in the user—the user's priors, models, and assumptions of both. Further, some may argue that the incorporation of beliefs on a dataset is inherently flawed. Still, MrBayes is clearly a useful tool, amongst many, to analyze phylogenetic relationships.
+MrBayes is a program for Bayesian inference using a Metropolis-Coupled Markov Chain Monte Carlo (MC-MCMC). Using posterior 
+probabilities of trees, we can make phylogenetic inferences for a group of species. To approximate this, MrBayes utilizes 
+MC-MCMC on phylogenetic trees. Importantly, we can adjust models and assumptions easily with MrBayes, allowing for the 
+assessment of diverse parameters relatively easily. The major strength of MrBayes is its computational efficiency, largely 
+due to Bayesian inference. Additionally, we can apply prior knowledge to a dataset to output a distribution of a 
+parameter—not just a point estimate. The major weaknesses of MrBayes are largely in the user—the user's priors, models, and 
+assumptions of both. Further, some may argue that the incorporation of beliefs on a dataset is inherently flawed. Still, 
+MrBayes is clearly a useful tool, amongst many, to analyze phylogenetic relationships.
 
 #### My assumptions
 Proportions:  Beta
@@ -228,7 +247,8 @@ mb HK_1-mb.nex
 
 ### ASTRAL for coalescence
 #### Rationale
-ASTRAL is a program for multi-species coalescence, outputting a species tree from a set of gene trees. I do not plan to utilize ASTRAL or any other coalescence program in my work, so I will use the test data set outlined in astral-tutorial.md.
+ASTRAL is a program for multi-species coalescence, outputting a species tree from a set of gene trees. I do not plan to 
+utilize ASTRAL or any other coalescence program in my work, so I will use the test data set outlined in astral-tutorial.md.
 Main strengths: CLI and incorporation of priors is a pro. Statistics seem to be an 
 improvement from ML phylogenies when gene tree discordance is not incredily high or low.
 Assumptions: Substitution model priors are usually imperfect biologically but sufficient nonetheless.
@@ -253,8 +273,14 @@ All output trees will be *arbitrarily* rooted at Chicken
 
 ======== Running the main analysis
 Number of taxa: 37 (37 species)
-Taxa: [Chicken, Marmoset, Orangutan, Human, Chimpanzee, Gorilla, Macaque, Galagos, Mouse_Lemur, Tree_Shrew, Mouse, Rat, Kangaroo_Rat, Guinea_Pig, Squirrel, Tarsier, Rabbit, Pika, Microbat, Megabat, Horse, Dolphin, Cow, Alpaca, Pig, Dog, Cat, Shrew, Hedgehog, Lesser_Hedgehog_Tenrec, Hyrax, Elephant, Sloth, Armadillos, Platypus, Opossum, Wallaby]
-Taxon occupancy: {Rat=424, Tarsier=424, Dolphin=424, Rabbit=424, Macaque=424, Pika=424, Alpaca=424, Shrew=424, Sloth=424, Tree_Shrew=424, Kangaroo_Rat=424, Armadillos=424, Chimpanzee=424, Horse=424, Dog=424, Human=424, Lesser_Hedgehog_Tenrec=424, Microbat=424, Platypus=424, Wallaby=424, Cow=424, Pig=424, Marmoset=424, Megabat=424, Hedgehog=424, Mouse=424, Guinea_Pig=424, Mouse_Lemur=424, Cat=424, Hyrax=424, Elephant=424, Chicken=424, Orangutan=424, Opossum=424, Galagos=424, Squirrel=424, Gorilla=424}
+Taxa: [Chicken, Marmoset, Orangutan, Human, Chimpanzee, Gorilla, Macaque, Galagos, Mouse_Lemur, Tree_Shrew, Mouse, Rat, 
+Kangaroo_Rat, Guinea_Pig, Squirrel, Tarsier, Rabbit, Pika, Microbat, Megabat, Horse, Dolphin, Cow, Alpaca, Pig, Dog, Cat, 
+Shrew, Hedgehog, Lesser_Hedgehog_Tenrec, Hyrax, Elephant, Sloth, Armadillos, Platypus, Opossum, Wallaby]
+Taxon occupancy: {Rat=424, Tarsier=424, Dolphin=424, Rabbit=424, Macaque=424, Pika=424, Alpaca=424, Shrew=424, Sloth=424, 
+Tree_Shrew=424, Kangaroo_Rat=424, Armadillos=424, Chimpanzee=424, Horse=424, Dog=424, Human=424, Lesser_Hedgehog_Tenrec=424, 
+Microbat=424, Platypus=424, Wallaby=424, Cow=424, Pig=424, Marmoset=424, Megabat=424, Hedgehog=424, Mouse=424, 
+Guinea_Pig=424, Mouse_Lemur=424, Cat=424, Hyrax=424, Elephant=424, Chicken=424, Orangutan=424, Opossum=424, Galagos=424, 
+Squirrel=424, Gorilla=424}
 Number of gene trees: 424
 0 trees have missing taxa
 Calculating quartet distance matrix (for completion of X)
