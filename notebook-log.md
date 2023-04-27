@@ -124,40 +124,16 @@ Assumptions: mutational processes same at each branch; all sites evolve independ
 (this is unlikely to be suitable for influenza in general, but this analysis will be a suitable first step toward a tree)
 
 #### download
-Downloaded raxml-ng_v1.1.0_linux_x86_64.zip from https://github.com/amkozlov/raxml-ng/releases/tag/1.1.0, as I had issues 
-with the make step after pulling from GitHub 
+Downloaded raxml-ng from brew with `brew install brewsci/bio/raxml-ng` on MacOS
 ```shell
-## moved .zip file to ~/Code/
-mkdir raxml-ng
-mv raxml-ng*.zip raxml-ng/
-unzip raxml-ng*.zip
-
 ./raxml-ng -v
- #(base) rieshunter@hries:~/Code/raxml-ng$ ./raxml-ng -v
-
- #RAxML-NG v. 1.1.0 released on 29.11.2021 by The Exelixis Lab.
- #Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
- #Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
- #Latest version: https://github.com/amkozlov/raxml-ng
- #Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
-
- #System: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz, 2 cores, 7 GB RAM
-
-## added to PATH, so I can call in myProject
-# nano .bashrc
-# PATH="$PATH:/home/rieshunter/Code/raxml-ng"
-## reloaded terminal session
-raxml-ng -v
- #<pre>(base) <font color="#8AE234"><b>rieshunter@hries</b></font>:<font color="#729FCF"><b>~/Code/myProject</b></font>$ 
-raxml-ng -v
-
- #RAxML-NG v. 1.1.0 released on 29.11.2021 by The Exelixis Lab.
- #Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
- #Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
- #Latest version: https://github.com/amkozlov/raxml-ng
- #Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
-
- #System: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz, 2 cores, 7 GB RAM
+ RAxML-NG v. 1.1-master released on 29.11.2021 by The Exelixis Lab.
+ Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+ Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+ Latest version: https://github.com/amkozlov/raxml-ng
+ Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+ 
+ System: Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz, 4 cores, 16 GB RAM
 ```
 
 #### execute
