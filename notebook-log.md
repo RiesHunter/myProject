@@ -161,6 +161,9 @@ raxml-ng --parse --msa ./clustalw_*.phy --model GTR+G
 raxml-ng --msa ./clustalw_*.phy --model GTR+G --prefix HK_clustalw --threads 2 --seed 920
 ```
 
+#### Moved all .log files to a log/ directory
+#### Moved all raxml ML files to ~/results/ and sorted into respective groups
+
 ### MrBayes for bayesian inference
 #### Rationale
 MrBayes is a program for Bayesian inference using a Metropolis-Coupled Markov Chain Monte Carlo (MC-MCMC). Using posterior 
