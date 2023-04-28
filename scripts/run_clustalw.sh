@@ -13,14 +13,14 @@ f=${file%%.fasta}
 echo $f
 clustalw \
   -ALIGN \
-  -INFILE=${cwd}/${f}.fasta \
-  -OUTFILE=${cwd}/clustalw_${f}.fasta \
+  -INFILE=./${f}.fasta \
+  -OUTFILE=./clustalw_${f}.fasta \
   -OUTPUT=FASTA
+rm ${f}.dnd
 done
 
-mkdir clustalw
-mv clustalw* clustalw
-mv *.dnd clustalw
+#mkdir clustalw
+#mv clustalw* clustalw
 
 ## REPORT TIME             
 duration=$SECONDS

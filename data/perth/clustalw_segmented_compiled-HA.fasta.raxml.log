@@ -1,0 +1,72 @@
+
+RAxML-NG v. 1.1-master released on 29.11.2021 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz, 4 cores, 16 GB RAM
+
+RAxML-NG was called at 27-Apr-2023 21:48:27 as follows:
+
+raxml-ng --check --msa ./clustalw_segmented_compiled-HA.fasta --model GTR+G
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1682650107
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (auto)
+
+[00:00:00] Reading alignment from file: ./clustalw_segmented_compiled-HA.fasta
+[00:00:00] Loaded alignment with 59 taxa and 1732 sites
+
+WARNING: Sequences HA|1103.removed.parsed and HA|1167.removed.parsed are exactly identical!
+WARNING: Sequences HA|1103.removed.parsed and HA|1168.removed.parsed are exactly identical!
+WARNING: Sequences HA|1103.removed.parsed and HA|1171.removed.parsed are exactly identical!
+WARNING: Sequences HA|1103.removed.parsed and HA|1173.removed.parsed are exactly identical!
+WARNING: Sequences HA|1109.removed.parsed and HA|1121.removed.parsed are exactly identical!
+WARNING: Sequences HA|1109.removed.parsed and HA|1122.removed.parsed are exactly identical!
+WARNING: Sequences HA|1109.removed.parsed and HA|1148.removed.parsed are exactly identical!
+WARNING: Sequences HA|1109.removed.parsed and HA|1149.removed.parsed are exactly identical!
+WARNING: Sequences HA|1109.removed.parsed and HA|1150.removed.parsed are exactly identical!
+WARNING: Sequences HA|1162.removed.parsed and HA|1163.removed.parsed are exactly identical!
+WARNING: Sequences HA|1162.removed.parsed and HA|1164.removed.parsed are exactly identical!
+WARNING: Sequences HA|1162.removed.parsed and HA|1165.removed.parsed are exactly identical!
+WARNING: Sequences HA|1162.removed.parsed and HA|1175.removed.parsed are exactly identical!
+WARNING: Sequences HA|1139.removed.parsed and HA|1116.removed.parsed are exactly identical!
+WARNING: Sequences HA|1153.removed.parsed and HA|1154.removed.parsed are exactly identical!
+WARNING: Sequences HA|1178.removed.parsed and HA|1180.removed.parsed are exactly identical!
+WARNING: Sequences HA|1179.removed.parsed and HA|1181.removed.parsed are exactly identical!
+WARNING: Sequences HA|1179.removed.parsed and HA|1182.removed.parsed are exactly identical!
+WARNING: Sequences HA|1123.removed.parsed and HA|1125.removed.parsed are exactly identical!
+WARNING: Sequences HA|1201.removed.parsed and HA|1204.removed.parsed are exactly identical!
+WARNING: Sequences HA|1213.removed.parsed and HA|1217.removed.parsed are exactly identical!
+WARNING: Sequences HA|1205.removed.parsed and HA|1210.removed.parsed are exactly identical!
+WARNING: Sequences HA|1209.removed.parsed and HA|1212.removed.parsed are exactly identical!
+WARNING: Sequences HA|1151.removed.parsed and HA|1152.removed.parsed are exactly identical!
+WARNING: Sequences HA|1129.removed.parsed and HA|1174.removed.parsed are exactly identical!
+WARNING: Duplicate sequences found: 25
+
+NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
+NOTE: was saved to: /Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/data/perth/clustalw_segmented_compiled-HA.fasta.raxml.reduced.phy
+
+Alignment comprises 1 partitions and 1732 sites
+
+Partition 0: noname
+Model: GTR+FO+G4m
+Alignment sites: 1732
+Gaps: 0.00 %
+Invariant sites: 91.69 %
+
+
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/data/perth/clustalw_segmented_compiled-HA.fasta.raxml.log
+
+Analysis started: 27-Apr-2023 21:48:27 / finished: 27-Apr-2023 21:48:27
+
+Elapsed time: 0.013 seconds
+

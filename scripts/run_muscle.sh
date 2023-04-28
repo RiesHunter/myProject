@@ -12,12 +12,12 @@ do
 f=${file%%.fasta}
 echo $f
 muscle \
-  -in ${cwd}/${f}.fasta \
-  -out ${cwd}/muscle_${f}.fasta
+  -in ./${f}.fasta \
+  -out ./muscle_${f}.fasta
 done
 
-mkdir muscle
-mv muscle* muscle
+#mkdir muscle
+#mv muscle* muscle
 
 ## REPORT TIME             
 duration=$SECONDS

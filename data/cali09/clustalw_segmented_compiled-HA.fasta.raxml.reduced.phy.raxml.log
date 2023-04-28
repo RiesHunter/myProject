@@ -1,0 +1,56 @@
+
+RAxML-NG v. 1.1-master released on 29.11.2021 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz, 4 cores, 16 GB RAM
+
+RAxML-NG was called at 27-Apr-2023 21:46:53 as follows:
+
+raxml-ng --parse --msa ./clustalw_segmented_compiled-HA.fasta.raxml.reduced.phy --model GTR+G
+
+Analysis options:
+  run mode: Alignment parsing and compression
+  start tree(s): 
+  random seed: 1682650013
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (auto)
+
+[00:00:00] Reading alignment from file: ./clustalw_segmented_compiled-HA.fasta.raxml.reduced.phy
+[00:00:00] Loaded alignment with 45 taxa and 1752 sites
+
+Alignment comprises 1 partitions and 113 patterns
+
+Partition 0: noname
+Model: GTR+FO+G4m
+Alignment sites / patterns: 1752 / 113
+Gaps: 0.00 %
+Invariant sites: 91.95 %
+
+
+NOTE: Binary MSA file created: ./clustalw_segmented_compiled-HA.fasta.raxml.reduced.phy.raxml.rba
+
+
+* Estimated memory requirements                : 2 MB
+
+* Recommended number of threads / MPI processes: 1
+
+Please note that numbers given above are rough estimates only. 
+Actual memory consumption and parallel performance on your system may differ!
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/data/cali09/clustalw_segmented_compiled-HA.fasta.raxml.reduced.phy.raxml.log
+
+Analysis started: 27-Apr-2023 21:46:53 / finished: 27-Apr-2023 21:46:53
+
+Elapsed time: 0.010 seconds
+
