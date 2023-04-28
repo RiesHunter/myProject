@@ -136,7 +136,7 @@ Downloaded raxml-ng from brew with `brew install brewsci/bio/raxml-ng` on MacOS
  System: Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz, 4 cores, 16 GB RAM
 ```
 
-#### execute
+#### prep sequences for raxml-ng
 ```shell
 ## remove spaces in taxa names for cali09
 sed -i.bak 's/parsed .*/parsed/g' muscle_segmented_compiled-HA.fasta
@@ -144,28 +144,21 @@ sed -i.bak 's/parsed .*/parsed/g' muscle_segmented_compiled-HA.fasta
 
 ## remove Genbank and spaces from taxa names from perth
 sed -i.bak 's/ GenBank.*//g' muscle_segmented_compiled-HA.fasta
- 
-#(base) rieshunter@hries:~/Code/myProject/data/HK_1/parsed_fa/muscle/raxml-ng$ 
-raxml-ng --check --msa ../muscle_segmented_compiled-HA.fasta --model GTR+G
-mv ../*raxml.* .
-raxml-ng --check --msa *.phy --model GTR+G
- # in both logs, we see identical consensus-level sequences, which are expected for rapid flu transmission within a 
-community. Acute infections transmit little diversity.
+```
 
-## time to infer the tree
-raxml-ng --msa *.phy --prefix HK_1_HA --model GTR+G --seed 920
- # (base) rieshunter@hries:~/Code/myProject/data/HK_1/parsed_fa/muscle/raxml-ng$ ls
- #total 236K
- #-rw-rw-r-- 1 rieshunter rieshunter  130 Mar 30 20:13 HK_1_HA.raxml.bestModel
- #-rw-rw-r-- 1 rieshunter rieshunter 1.4K Mar 30 20:13 HK_1_HA.raxml.bestTree
- #-rw-rw-r-- 1 rieshunter rieshunter 1.3K Mar 30 20:13 HK_1_HA.raxml.bestTreeCollapsed
- #-rw-rw-r-- 1 rieshunter rieshunter  14K Mar 30 20:13 HK_1_HA.raxml.log
- #-rw-rw-r-- 1 rieshunter rieshunter  28K Mar 30 20:13 HK_1_HA.raxml.mlTrees
- #-rw-rw-r-- 1 rieshunter rieshunter 3.8K Mar 30 20:13 HK_1_HA.raxml.rba
- #-rw-rw-r-- 1 rieshunter rieshunter  28K Mar 30 20:13 HK_1_HA.raxml.startTree
- #-rw-rw-r-- 1 rieshunter rieshunter 4.7K Mar 30 20:13 muscle_segmented_compiled-HA.fasta.raxml.log
- #-rw-rw-r-- 1 rieshunter rieshunter  54K Mar 30 20:13 muscle_segmented_compiled-HA.fasta.raxml.reduced.phy
- #-rw-rw-r-- 1 rieshunter rieshunter 1.4K Mar 30 20:13 muscle_segmented_compiled-HA.fasta.raxml.reduced.phy.raxml.log
+#### Create .phy 
+```shell
+raxml-ng --check --msa ./clustalw_*.fasta --model GTR+G
+```
+
+#### Check for MSA
+```shell
+raxml-ng --parse --msa ./clustalw_*.phy --model GTR+G
+```
+
+#### Infer the tree
+```shell
+raxml-ng --msa ./clustalw_*.phy --model GTR+G --prefix HK_clustalw --threads 2 --seed 920
 ```
 
 ### MrBayes for bayesian inference
