@@ -1,0 +1,55 @@
+
+RAxML-NG v. 1.1-master released on 29.11.2021 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz, 4 cores, 16 GB RAM
+
+RAxML-NG was called at 27-Apr-2023 21:46:40 as follows:
+
+raxml-ng --check --msa ./muscle_segmented_compiled-HA.fasta --model GTR+G
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1682650000
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (auto)
+
+[00:00:00] Reading alignment from file: ./muscle_segmented_compiled-HA.fasta
+[00:00:00] Loaded alignment with 53 taxa and 1752 sites
+
+WARNING: Sequences HA|1363.removed.parsed and HA|1364.removed.parsed are exactly identical!
+WARNING: Sequences HA|1361.removed.parsed and HA|1362.removed.parsed are exactly identical!
+WARNING: Sequences HA|1403.removed.parsed and HA|1410.removed.parsed are exactly identical!
+WARNING: Sequences HA|1404.removed.parsed and HA|1405.removed.parsed are exactly identical!
+WARNING: Sequences HA|1404.removed.parsed and HA|1411.removed.parsed are exactly identical!
+WARNING: Sequences HA|1346.removed.parsed and HA|1348.removed.parsed are exactly identical!
+WARNING: Sequences HA|1349.removed.parsed and HA|1350.removed.parsed are exactly identical!
+WARNING: Sequences HA|1349.removed.parsed and HA|1357.removed.parsed are exactly identical!
+WARNING: Duplicate sequences found: 8
+
+NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
+NOTE: was saved to: /Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/data/cali09/muscle_segmented_compiled-HA.fasta.raxml.reduced.phy
+
+Alignment comprises 1 partitions and 1752 sites
+
+Partition 0: noname
+Model: GTR+FO+G4m
+Alignment sites: 1752
+Gaps: 0.00 %
+Invariant sites: 91.95 %
+
+
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/data/cali09/muscle_segmented_compiled-HA.fasta.raxml.log
+
+Analysis started: 27-Apr-2023 21:46:40 / finished: 27-Apr-2023 21:46:40
+
+Elapsed time: 0.007 seconds
+

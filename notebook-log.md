@@ -163,6 +163,7 @@ raxml-ng --msa ./clustalw_*.phy --model GTR+G --prefix HK_clustalw --threads 2 -
 
 #### Moved all .log files to a log/ directory
 #### Moved all raxml ML files to ~/results/ and sorted into respective groups
+#### Moved all *_segmented_compiled-HA.fasta files to ~/results/ and sorted into respective groups
 
 ### MrBayes for bayesian inference
 #### Rationale
