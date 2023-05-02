@@ -1,4 +1,7 @@
-Group	ClustalW_score	ClustalW_secs	Muscle_secs	n_Sequences	ClustalW_rax_loglikelihood	Muscle_rax_loglikelihood
-HK	9507102	3192	51	310	-3405.190424	-3405.190432
-cali09	16111219	92	6	53	-3734.540121	-3734.540147
-perth	19965190	113	7	59	-3602.236208	-3602.236203
+Group	Score	Secs	Seqs	Rax_loglikelihood
+HK_C	9507102	3192	310	-3405.190424
+cali09_C	16111219	92	53	-3734.540121
+perth_C	19965190	113	59	-3602.236208
+HK_M		51	310	-3405.190432
+cali09_M		6	53	-3734.540147
+perth_M		7	59	-3602.236203

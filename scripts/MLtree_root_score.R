@@ -21,11 +21,11 @@ if(!require(phytools)){
 }
 
 #### Import data ####
-dir_s <- paste("/Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/results")
+dir_s <- paste("/Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/figures")
 dir_HK <- paste("/Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/results/HK")
 dir_p <- paste("/Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/results/perth")
 dir_c <- paste("/Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/results/cali09")
-
+dir <- paste("/Users/rieshunter/Library/CloudStorage/GoogleDrive-hries@wisc.edu/Shared drives/TCF lab/Current Lab Members/Hunter_Ries/_Admin/Thesis/Coursework/Phylo/myProject/results")
 #### Functions ####
 clean_cols <- function(x) {
   names(x) <- gsub(x = names(x), pattern = ".removed.parsed", replacement = "")  
@@ -102,7 +102,7 @@ plot(Muscle)
 df_likelihood <- rbind(likelihood(Muscle, "cali09_m_r"),df_likelihood)
 
 ## compare trees
-comparePhylo(ClustalW, Muscle, plot = T, use.edge.length = T)
+plot_cali09 <- comparePhylo(ClustalW, Muscle, plot = T, use.edge.length = T)
 
 #### perth ####
 ## import
@@ -129,7 +129,72 @@ plot(Muscle)
 df_likelihood <- rbind(likelihood(Muscle, "perth_m_r"),df_likelihood)
 
 ## compare trees
-comparePhylo(ClustalW, Muscle, plot = T, use.edge.length = T)
+plot_perth <- comparePhylo(ClustalW, Muscle, plot = T, use.edge.length = T)
+
+
+#### Stats ####
+## df_run
+setwd(dir); getwd(); dir()
+df_run <- as.data.frame(read_tsv("run_data.tsv"))
+df_run$Seqs_per_sec <- df_run$Seqs/df_run$Secs
+df_run <- separate(df_run, "Group", c("dataset", "alignment"), sep = "_")
+df_run$alignment <- gsub("C", "ClustalW", df_run$alignment)
+df_run$alignment <- gsub("M", "MUSCLE", df_run$alignment)
+df_run$da <- as.factor(paste(df_run$dataset, df_run$alignment, sep = "_"))
+df_run$Seqs_per_sec <- round(df_run$Seqs_per_sec, 3)
+
+## df_likelihood
+df_likelihood <- separate(df_likelihood, "group", c("dataset", "alignment", "ml"), sep = "_")
+df_likelihood$dataset <- as.factor(df_likelihood$dataset)
+df_likelihood$alignment <- gsub("m", "MUSCLE", df_likelihood$alignment)
+df_likelihood$alignment <- gsub("c", "ClustalW", df_likelihood$alignment)
+df_likelihood$alignment <- as.factor(df_likelihood$alignment)
+df_likelihood$da <- ""
+df_likelihood$da <- paste(df_likelihood$dataset, df_likelihood$alignment, sep = "_")
+df_likelihood$da <- as.factor(df_likelihood$da)
+df_likelihood$logLik <- round(df_likelihood$logLik, 4)
 
 #### Plot ####
 setwd(dir_s); getwd(); dir()
+## plot_run_stats
+plot_run_stats <- ggplot() + 
+  geom_point(data = df_run, 
+             aes(x = dataset, y = Seqs_per_sec,
+                 color = alignment, group = alignment),
+             position = position_dodge2(width = .2)) + 
+  geom_text(data = df_run, 
+            aes(x = dataset, y = Seqs_per_sec,
+                color = alignment, group = alignment, label = Seqs_per_sec),
+            position = position_dodge2(width = .2), vjust=-0.5, size = 2.5,
+            show.legend = FALSE) + 
+  scale_y_continuous(limits = c(0, 12)) + 
+  labs(x = "", y = "Sequences per second") + 
+  theme_bw() + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+
+## plot_likelihood
+plot_likelihood <- ggplot() + 
+  geom_point(data = df_likelihood, 
+             aes(x = dataset, y = logLik, 
+                 color = alignment, group = alignment),
+             position = position_dodge2(width = .2)) + 
+  geom_text(data = df_likelihood, 
+            aes(x = dataset, y = logLik, 
+                color = alignment, group = alignment, label = logLik),
+            position=position_dodge2(0.9), vjust=-0.5, size = 2.5,
+            show.legend = FALSE) + 
+  scale_y_reverse(limits = c(-3400, -4000)) +
+  labs(x = "", y = "Log10 Likelihood of Tree") + 
+  theme_bw() + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+
+setwd(dir_s); getwd(); dir()
+ggsave("Fig_speed.pdf", plot_run_stats,
+       width = 6.5, height = 3, 
+       units = "in", dpi = 320)
+
+ggsave("Fig_logLikelihood.pdf", plot_likelihood,
+       width = 6.5, height = 3, 
+       units = "in", dpi = 320)
