@@ -222,7 +222,6 @@ df_treelength$da <- paste(df_treelength$dataset, df_treelength$alignment, sep = 
 df_treelength$da <- as.factor(df_treelength$da)
 df_treelength$treelength <- round(df_treelength$treelength, 4)
 
-
 #### Plot ####
 setwd(dir_s); getwd(); dir()
 ## plot_run_stats
@@ -259,11 +258,31 @@ plot_likelihood <- ggplot() +
   theme(legend.position = "bottom",
         legend.title = element_blank())
 
-setwd(dir_s); getwd(); dir()
-ggsave("Fig_speed.pdf", plot_run_stats,
-       width = 6.5, height = 3, 
+## plot_treelength
+plot_treelength <- ggplot() + 
+  geom_point(data = df_treelength, 
+             aes(x = dataset, y = treelength, 
+                 color = alignment, group = alignment),
+             position = position_dodge2(width = .2)) + 
+  geom_text(data = df_treelength, 
+            aes(x = dataset, y = treelength, 
+                color = alignment, group = alignment, label = treelength),
+            position=position_dodge2(0.9), vjust=-0.5, size = 2.5,
+            show.legend = FALSE) + 
+  scale_y_continuous(limits = c(0, 2)) +
+  labs(x = "", y = "Tree length") + 
+  theme_bw() + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank())
+  
+
+plots <- plot_grid(plot_run_stats, 
+                   plot_likelihood, 
+                   plot_treelength,
+                   ncol = 1,
+                   align = "v")
+ggsave("Fig3.pdf", plots,
+       width = 5, height = 10, 
        units = "in", dpi = 320)
 
-ggsave("Fig_logLikelihood.pdf", plot_likelihood,
-       width = 6.5, height = 3, 
-       units = "in", dpi = 320)
+
