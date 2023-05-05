@@ -43,9 +43,9 @@ clean_tips <- function(x) {
   return(x)
 }
 root_tree <- function (x, y) {
-  x <- root(x, outgroup = y, 
-            resolve.root = TRUE)
-  #x <- midpoint.root(x)
+  #x <- root(x, outgroup = y, 
+  #          resolve.root = TRUE)
+  x <- midpoint.root(x)
   print(is.rooted(x))
   return(x)
 }
@@ -223,66 +223,3 @@ df_treelength$da <- as.factor(df_treelength$da)
 df_treelength$treelength <- round(df_treelength$treelength, 4)
 
 #### Plot ####
-setwd(dir_s); getwd(); dir()
-## plot_run_stats
-plot_run_stats <- ggplot() + 
-  geom_point(data = df_run, 
-             aes(x = dataset, y = Seqs_per_sec,
-                 color = alignment, group = alignment),
-             position = position_dodge2(width = .2)) + 
-  geom_text(data = df_run, 
-            aes(x = dataset, y = Seqs_per_sec,
-                color = alignment, group = alignment, label = Seqs_per_sec),
-            position = position_dodge2(width = .2), vjust=-0.5, size = 2.5,
-            show.legend = FALSE) + 
-  scale_y_continuous(limits = c(0, 12)) + 
-  labs(x = "", y = "Sequences per second") + 
-  theme_bw() + 
-  theme(legend.position = "bottom",
-        legend.title = element_blank())
-
-## plot_likelihood
-plot_likelihood <- ggplot() + 
-  geom_point(data = df_likelihood, 
-             aes(x = dataset, y = logLik, 
-                 color = alignment, group = alignment),
-             position = position_dodge2(width = .2)) + 
-  geom_text(data = df_likelihood, 
-            aes(x = dataset, y = logLik, 
-                color = alignment, group = alignment, label = logLik),
-            position=position_dodge2(0.9), vjust=-0.5, size = 2.5,
-            show.legend = FALSE) + 
-  scale_y_reverse(limits = c(-3400, -4000)) +
-  labs(x = "", y = "Log10 Likelihood of Tree") + 
-  theme_bw() + 
-  theme(legend.position = "bottom",
-        legend.title = element_blank())
-
-## plot_treelength
-plot_treelength <- ggplot() + 
-  geom_point(data = df_treelength, 
-             aes(x = dataset, y = treelength, 
-                 color = alignment, group = alignment),
-             position = position_dodge2(width = .2)) + 
-  geom_text(data = df_treelength, 
-            aes(x = dataset, y = treelength, 
-                color = alignment, group = alignment, label = treelength),
-            position=position_dodge2(0.9), vjust=-0.5, size = 2.5,
-            show.legend = FALSE) + 
-  scale_y_continuous(limits = c(0, 2)) +
-  labs(x = "", y = "Tree length") + 
-  theme_bw() + 
-  theme(legend.position = "bottom",
-        legend.title = element_blank())
-  
-
-plots <- plot_grid(plot_run_stats, 
-                   plot_likelihood, 
-                   plot_treelength,
-                   ncol = 1,
-                   align = "v")
-ggsave("Fig3.pdf", plots,
-       width = 5, height = 10, 
-       units = "in", dpi = 320)
-
-

@@ -13,36 +13,53 @@ Evolution w/in hosts through serial time points
 Evolution b/w hosts through household pairing
 
 ### Stage of data
-Fastas to be aligned.
+Fastas from each influenza A virus subtype.
+ - Need to align in ClustalW/MUSCLE, run through RAxML-ng, compute in R.
 
 ### Download data
 Processed fastas retrieved from GitHub page:
 https://github.com/lauringlab/Host_level_IAV_evolution
 
-### Create concatenated fasta file for each segment
-Created "concatenate.sh", which effectively grabs each segment from each sample and concatenates it to one file, per gene. 
-Here's small sample:
+### Create HA-only fasta file for each segment
+Created "split_concatenate.sh", which effectively grabs each segment from each sample and concatenates it to one file, by gene. 
+
+Here's the small script:
 ```shell
-sed -n '/>*NP/p' ./${f}.fasta > name
-sed "s/NP/NP|${f}/g" name > name.temp
-cat name.temp >> segmented_compiled-NP
-sed -n '/>*NP/,/>/p' ./${f}.fasta > seq
+#!/bin/bash
+
+pwd
+
+for file in *.fasta
+do
+f=${file%%.fasta}
+## HA
+sed -n '/>*HA/p' ./${f}.fasta > name
+sed "s/HA/HA|${f}/g" name > name.temp
+cat name.temp >> segmented_compiled-HA
+sed -n '/>*HA/,/>/p' ./${f}.fasta > seq
 sed '$ d' seq > seq.temp
 sed '1d' seq.temp > seq
-cat seq >> segmented_compiled-NP
-echo -ne "[#--------] ${f}\r"
+cat seq >> segmented_compiled-HA
+echo -ne "${f}\r"
+echo ""
+done
+
+mv segmented_compiled-HA segmented_compiled-HA.fasta
+
+rm seq
+rm name
+rm name.temp
+rm seq.temp
 ```
 
-### Align HK_1 with ClustalW and Muscle
-ClustalW will be a good "Vanilla" test that is most strong in its use of weight-based scoring. Because so many of my 
-sequences will be largely identical, this could be an important component that other software may not have. ClustalW also 
-outputs a .dnd file which can be used to make a dendrogram. Might save me a step later!
-Muscle will be a nice experiment on progressive alignment, which should be an improvement in accuracy and speed (yes, almost 
-3x faster!) in comparison to ClustalW. While this is faster and perhaps more accurate, I'm unsure at this point how to test 
-accuracy in comparison to other programs. How do we know which is more accurate?
+### Align HK_1 with ClustalW and MUSCLE
+ClustalW will be a good "Vanilla" test that is most strong in its use of weight-based scoring and iterative progressive alignment. Because so many of my sequences will be largely identical, this could be an important component that other software may not have. ClustalW also outputs a .dnd file which can be used to make a dendrogram. MUSCLE will be a nice experiment on distance-based progressive, non-iterative alignment, which should be an improvement in accuracy and speed in comparison to ClustalW. 
 
-Installed clustalw with `brew install brewsci/bio/clustal-w`
-clustalw version: CLUSTAL 2.1 Multiple Sequence Alignments
+Installed ClustalW with `brew install brewsci/bio/clustal-w`
+ClustalW version: CLUSTAL 2.1 Multiple Sequence Alignments
+
+Installed MUSCLE with `brew install brewsci/bio/muscle`
+MUSCLE version: MUSCLE v3.8.1551
 
 Created "run_clustalw.sh":
 ```shell
@@ -51,7 +68,6 @@ Created "run_clustalw.sh":
 ## TIME START
 SECONDS=0
 
-#data_dir="/home/rieshunter/GitHub/myProject/data/aligned"
 cwd=$(pwd)
 echo $cwd
 
@@ -61,14 +77,38 @@ f=${file%%.fasta}
 echo $f
 clustalw \
   -ALIGN \
-  -INFILE=${cwd}/${f}.fasta \
-  -OUTFILE=${cwd}/clustalw_${f}.fasta \
+  -INFILE=./${f}.fasta \
+  -OUTFILE=./clustalw_${f}.fasta \
   -OUTPUT=FASTA
+rm ${f}.dnd
 done
 
-mkdir clustalw
-mv clustalw* clustalw
-mv *.dnd clustalw
+## REPORT TIME             
+duration=$SECONDS
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
+echo "----- Done -----"
+echo ""
+
+```
+
+Created "run_muscle.sh":
+```shell
+#!/bin/bash
+
+## TIME START
+SECONDS=0
+
+cwd=$(pwd)
+echo $cwd
+
+for file in segmented_compiled-*.fasta
+do
+f=${file%%.fasta}
+echo $f
+muscle \
+  -in ./${f}.fasta \
+  -out ./muscle_${f}.fasta
+done
 
 ## REPORT TIME             
 duration=$SECONDS
@@ -77,46 +117,9 @@ echo "----- Done -----"
 echo ""
 ```
 
-Benchmarking 10 flu genomes:
- - Muscle: 1 minute and 14 seconds
- - Clustalw: 3 minutes and 11 seconds
- - Tcoffee: [soon-to-be-clocked]
+Both scripts will allow for the rapid alignment of flu sequences, regardless of subtype. Furthermore, these scripts will allow for control over command flags and data processing between subtypes. Each script outputs time from start to finish, which will be used to calculate processing speed.
 
-### Utilize ape, phangorn, and adegenet to construct trees
-In R, I imported the muscle alignment for HA
-The alignment was imported with both "fasta2DNAbin" and "read.phyDat"
-The "fasta2DNAbin" command was used for a UPGMA distance-based trees
-  Pairwise distances were calculated using JC69
-  Distance matrices were converted to trees with UPGMA and NJ
-The "read.phyDat" command was used for a parsimony-based tree
-  Parsimony of all trees were calculated:
-    ```shell
-      > parsimony(treeUPGMA, phydat_muscle_HA)
-    [1] 97
-    > parsimony(treeNJ, phydat_muscle_HA)
-    [1] 90
-    > parsimony(treeRatchet, phydat_muscle_HA)
-    [1] 90
-    ```
-  treeRatchet is the parsimony tree
-    A parsimony ratchet (100 iterations) was applied to allow for quick and relatively accurate maximum parsimony 
-calculations
-    acctran was applied to allow for polytomies (this dataset has a bunch of them!)
-    di2multi collapses branches of zero length
-
-Chosen algorithms:
-  JC69
-    - Incredibly simple
-    - Assumes equal base freq.
-    - Assumes equal base mutation rates
-    - Only parameter is µ, the overall substitution rate
-
-Figures:
-![treeNJ](figures/treeNJ.tiff)
-![treeUPGMA](figures/treeUPGMA.tiff)
-![treeRatchet](figures/treeRatchet.tiff)
-
-### RAxML-NG for maximum likelihood
+### Create maximum likelihood trees with RAxML-NG
 RAxML-NG is purportedly a fast, modular ML program. It touts its speed and precision, but seems to fall short of IQ-Tree in 
 tree inference accuracy. Still, it generally finds the best-scoring tree overall! Its speed and general precision makes it 
 the optimal choice for my preliminary ML calculations.
@@ -141,7 +144,6 @@ Downloaded raxml-ng from brew with `brew install brewsci/bio/raxml-ng` on MacOS
 ## remove spaces in taxa names for cali09
 sed -i.bak 's/parsed .*/parsed/g' muscle_segmented_compiled-HA.fasta
  # creates .bak backup of original
-
 ## remove Genbank and spaces from taxa names from perth
 sed -i.bak 's/ GenBank.*//g' muscle_segmented_compiled-HA.fasta
 ```
@@ -150,12 +152,10 @@ sed -i.bak 's/ GenBank.*//g' muscle_segmented_compiled-HA.fasta
 ```shell
 raxml-ng --check --msa ./clustalw_*.fasta --model GTR+G
 ```
-
 #### Check for MSA
 ```shell
 raxml-ng --parse --msa ./clustalw_*.phy --model GTR+G
 ```
-
 #### Infer the tree
 ```shell
 raxml-ng --msa ./clustalw_*.phy --model GTR+G --prefix HK_clustalw --threads 2 --seed 920
@@ -165,6 +165,7 @@ raxml-ng --msa ./clustalw_*.phy --model GTR+G --prefix HK_clustalw --threads 2 -
 #### Moved all raxml ML files to ~/results/ and sorted into respective groups
 #### Moved all *_segmented_compiled-HA.fasta files to ~/results/ and sorted into respective groups
 
+# Not used in final report or analyses
 ### MrBayes for bayesian inference
 #### Rationale
 MrBayes is a program for Bayesian inference using a Metropolis-Coupled Markov Chain Monte Carlo (MC-MCMC). Using posterior 

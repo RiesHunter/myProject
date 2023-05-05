@@ -3,7 +3,6 @@
 ## TIME START
 SECONDS=0
 
-#data_dir="/home/rieshunter/GitHub/myProject/data/aligned"
 cwd=$(pwd)
 echo $cwd
 
@@ -15,9 +14,6 @@ muscle \
   -in ./${f}.fasta \
   -out ./muscle_${f}.fasta
 done
-
-#mkdir muscle
-#mv muscle* muscle
 
 ## REPORT TIME             
 duration=$SECONDS

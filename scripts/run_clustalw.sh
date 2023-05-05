@@ -3,7 +3,6 @@
 ## TIME START
 SECONDS=0
 
-#data_dir="/home/rieshunter/GitHub/myProject/data/aligned"
 cwd=$(pwd)
 echo $cwd
 
@@ -18,9 +17,6 @@ clustalw \
   -OUTPUT=FASTA
 rm ${f}.dnd
 done
-
-#mkdir clustalw
-#mv clustalw* clustalw
 
 ## REPORT TIME             
 duration=$SECONDS

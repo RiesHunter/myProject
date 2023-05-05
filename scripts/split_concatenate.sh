@@ -19,9 +19,6 @@ done
 
 mv segmented_compiled-HA segmented_compiled-HA.fasta
 
-#mkdir segmented_compiled_fastas
-#mv segmented_compiled-* segmented_compiled_fastas
-
 rm seq
 rm name
 rm name.temp
