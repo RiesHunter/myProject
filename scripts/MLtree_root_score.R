@@ -87,8 +87,8 @@ df_treelength <- rbind(treelength(ClustalW, "HK_m_r"),df_treelength)
 ## compare trees
 plot_HK <- comparePhylo(ClustalW, Muscle, plot = T, use.edge.length = T)
 
-wasp.cophylo<-cophylo(ClustalW,Muscle)
-plot(wasp.cophylo,link.type="curved",
+CM_cophylo<-cophylo(ClustalW,Muscle)
+plot(CM_cophylo,link.type="curved",
      link.lwd=4,
      link.lty="solid",
      link.col=make.transparent("red", 0.25))
@@ -130,8 +130,8 @@ df_treelength <- rbind(treelength(ClustalW, "cali09_m_r"),df_treelength)
 ## compare trees
 plot_cali09 <- comparePhylo(ClustalW, Muscle, plot = T, use.edge.length = T)
 
-wasp.cophylo<-cophylo(ClustalW,Muscle)
-plot(wasp.cophylo,link.type="curved",
+CM_cophylo<-cophylo(ClustalW,Muscle)
+plot(CM_cophylo,link.type="curved",
      link.lwd=4,
      link.lty="solid",
      link.col=make.transparent("red", 0.25))
@@ -173,8 +173,8 @@ df_treelength <- rbind(treelength(ClustalW, "perth_m_r"),df_treelength)
 ## compare trees
 plot_perth <- comparePhylo(ClustalW, Muscle, plot = T, use.edge.length = T)
 
-wasp.cophylo<-cophylo(ClustalW,Muscle)
-plot(wasp.cophylo,link.type="curved",
+CM_cophylo<-cophylo(ClustalW,Muscle)
+plot(CM_cophylo,link.type="curved",
      link.lwd=4,
      link.lty="solid",
      link.col=make.transparent("red", 0.25))
